@@ -33,9 +33,9 @@ const operators = document.querySelectorAll('.operator');
 const equal = document.querySelector('.equal');
 const clear = document.querySelector('.clear')
 
-digits.forEach(elem=>elem.addEventListener('click',show));
+digits.forEach(elem=>elem.addEventListener('click',showNumber));
 
-function show(){
+function showNumber(){
     if (display.textContent!=0 && display.textContent != answer){
         return display.textContent += this.textContent;
     }
@@ -45,26 +45,29 @@ function show(){
 operators.forEach(elem=>elem.addEventListener('click',operatorPressed));
 
 function operatorPressed() {
-  if (pendingOperation) {
-    secondNumber = +display.textContent;
-    answer = operate(firstNumber, secondNumber, operator);
-    display.textContent = answer;
-    firstNumber = +answer;
-  } else {
-    firstNumber = +display.textContent;
-    display.textContent = '';
+
+
+    if (pendingOperation) {
+        secondNumber = +display.textContent;
+        answer = operate(firstNumber, secondNumber, operator);
+        display.textContent = answer;
+        firstNumber = +answer;
+    } else {
+        firstNumber = +display.textContent;
+        display.textContent = '';
 
   }
 
-  operator = this.textContent;
+    operator = this.textContent;
 
-  if (operator === '+' || operator === '-' || operator === '*' || operator === '/') {
-    pendingOperation = true;
-  } else {
-    pendingOperation = false;
+    if (operator === '+' || operator === '-' || 
+    operator === '*' || operator === '/') {
+        pendingOperation = true;
+    } else {
+        pendingOperation = false;
   }
+
 }
-
 
 equal.addEventListener('click',result);
 
