@@ -2,22 +2,42 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: rgb(3, 112, 112);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.digits-and-operators{
+.display{
     display: flex;
+    height: 50px;
+    padding-right: 12px;
+    justify-content: flex-end;
+    align-items: center;
+    border: solid white 1px;
+    font-size: 30px;
+    background-color: aliceblue;
 }
 
-.digits{
-    width: 150px;
-    gap: 4px;
+.container{
+    width: 160px;
+    
     display: flex;
     flex-wrap: wrap;
 }
 
-.digit,.operator{
+.digit, .clear,
+.operator, .equal{
     height: 40px;
     width: 40px;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    border: rgb(253, 253, 253) solid 1px;
+    border-radius: 0;
+}
+
+.digit:hover, .clear:hover,
+.operator:hover, .equal:hover{
+    background-color: antiquewhite;
 }
 
 .operators{
