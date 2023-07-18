@@ -23,7 +23,9 @@ function operate(num1,num2,operator){
     if (operator==='/') return divide(num1,num2);
 }
 
-let firstNumber,secondNumber,operator,answer;
+let firstNumber=0,secondNumber=0,answer=0,operator;
+let pendingOperation = false;
+
 
 let display = document.querySelector('.display');
 const digits = document.querySelectorAll('.digit');
@@ -42,12 +44,27 @@ function show(){
 
 operators.forEach(elem=>elem.addEventListener('click',operatorPressed));
 
-function operatorPressed(){
+function operatorPressed() {
+  if (pendingOperation) {
+    secondNumber = +display.textContent;
+    answer = operate(firstNumber, secondNumber, operator);
+    display.textContent = answer;
+    firstNumber = +answer;
+  } else {
     firstNumber = +display.textContent;
     display.textContent = '';
-    operator = this.textContent;
-    return operator
+
+  }
+
+  operator = this.textContent;
+
+  if (operator === '+' || operator === '-' || operator === '*' || operator === '/') {
+    pendingOperation = true;
+  } else {
+    pendingOperation = false;
+  }
 }
+
 
 equal.addEventListener('click',result);
 
@@ -55,8 +72,9 @@ function result(){
     secondNumber = +display.textContent;
     answer = operate(firstNumber,secondNumber,operator);
     display.textContent = answer;
-    firstNumber = 0;
-    secondNumber =0;
+    firstNumber = +display.textContent;
+    secondNumber = 0;
+    pendingOperation = false;
 }
 
 clear.addEventListener('click',reset);
@@ -66,4 +84,5 @@ function reset(){
     firstNumber = 0;
     secondNumber = 0;
     answer = 0;
+    pendingOperation = false;
 }
